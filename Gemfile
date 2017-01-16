@@ -103,3 +103,4 @@ gem 'rest-client', '~> 1.8', :require => "restclient"
 gem "sluggable"
 gem 'figaro'
 gem 'rspec'
+gem 'heroku'
