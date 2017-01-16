@@ -17,31 +17,54 @@
   <body>
 
     <div class="page_content">
-      <div id="user_nav">
+      <div id="user_nav" class="row">
+        <div class="left-part">
+          <%- if controller_name != 'sessions' %>
+            <%= link_to "Log in", new_session_path(resource_name) %><br />
+          <% end -%>
 
-        <%= link_to 'Home', '/' %>
-	      <% if user_signed_in? %>
-	        Signed in as <%= current_user.email %>. Not you?
-          <%= link_to 'Profile', profile_path(current_user) %>
-          <%= link_to 'Edit Profile', edit_user_registration_path(current_user) %>
-	        <%= link_to "Sign out", destroy_user_session_path %>
-	      <% else %>
-	        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-	      <% end %>
+          <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+            <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+          <% end -%>
+
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+          <% end -%>
+
+          <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+            <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+          <% end -%>
+
+          <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+            <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+          <% end -%>
+        </div>
+        <div class="right-part">
+          <%= link_to 'Home', '/' %>
+  	      <% if user_signed_in? %>
+  	        Signed in as <%= current_user.email %>. Not you?
+            <%= link_to 'Profile', profile_path(current_user) %>
+            <%= link_to 'Edit Profile', edit_user_registration_path(current_user) %>
+  	        <%= link_to "Sign out", destroy_user_session_path %>
+  	      <% else %>
+  	        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+  	      <% end %>
+        </div>
+
+
       </div>
+      <%= render 'devise/shared/links' %>
+      <div style="height: 10px">
+        <%= render 'devise/shared/alerts' %>
+      </div>
+
+
+      <%= yield %>
 	  </div>
 
-    <%= render 'devise/shared/links' %>
-    <%= render 'devise/shared/alerts' %>
 
-    <%= yield %>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted">Copyright &copy; JsNV</p>
-        </div>
-    </footer>
+
 
     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
