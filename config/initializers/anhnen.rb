@@ -33,3 +33,12 @@ Delayed::Job.enqueue EmailJob.new(user.id, 1)
 
  # Enqueue a job with priority of 0, starting tomorrow
 Delayed::Job.enqueue EmailJob.new(user.id, 1, 1.day.from_now)
+
+# Start a single worker
+RAILS_ENV=staging bin/delayed_job start
+
+# Start multiple workers, each in a separate process
+RAILS_ENV=production bin/delayed_job -n 4 start
+
+# Stop all workers
+RAILS_ENV=staging bin/delayed_job stop

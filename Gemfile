@@ -107,3 +107,5 @@ gem 'heroku'
 gem 'carrierwave-ftp', :require => 'carrierwave/storage/ftp/all' # both FTP/SFTP
 gem 'mini_magick',             '3.8.0'
 gem 'carrierwave',             '0.10.0'
+gem 'delayed_job',
+gem 'delayed_job_active_record',
