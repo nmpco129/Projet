@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JsNV</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', 'forms', 'reset', 'scaffold', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <meta property="title" content="<%= @page_title || ENV["DEFAULT_PAGE_TITLE"] %>"/>
+
+    <meta property="description" content="<%= @page_description || ENV["DEFAULT_PAGE_DESCRIPTION"] %>"/>
+    <%= content_for :page_specific_head %>
+  </head>
+
+  <!-- Navigation -->
+  <body>
+
+    <div class="page_content">
+      <div id="user_nav">
+
+        <%= link_to 'Home', '/' %>
+	      <% if user_signed_in? %>
+	        Signed in as <%= current_user.email %>. Not you?
+          <%= link_to 'Profile', profile_path(current_user) %>
+          <%= link_to 'Edit Profile', edit_user_registration_path(current_user) %>
+	        <%= link_to "Sign out", destroy_user_session_path %>
+	      <% else %>
+	        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+	      <% end %>
+      </div>
+	  </div>
+
+    <%= render 'devise/shared/links' %>
+    <%= render 'devise/shared/alerts' %>
+
+    <%= yield %>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Copyright &copy; JsNV</p>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+    <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+  </body>
+</html>
